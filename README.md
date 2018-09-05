@@ -1,6 +1,6 @@
 # My-Bomber-Man
-My Bomber Man </n>
-Move - WASD </n>
-Bomb - Space </n>
-Pause - P </n>
-Exit - Escape </n>
+My Bomber Man <br>
+Move - WASD <br>
+Bomb - Space <br>
+Pause - P <br>
+Exit - Escape <br>

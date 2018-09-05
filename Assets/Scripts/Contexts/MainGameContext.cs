@@ -1,4 +1,5 @@
-﻿using Mediators.MainGame;
+﻿using Commands;
+using Mediators.MainGame;
 using Mediators.Managers;
 using Mediators.UI;
 using strange.extensions.command.api;
@@ -66,14 +67,16 @@ namespace Contexts
             injectionBinder.Bind<CheckHitExplodePlayerSignal>().ToSingleton();
 
             // Init commands
-//            commandBinder.Bind<OnBuyTurretSignal>().To<OnBuyTurretCommand>(); 
+            commandBinder.Bind<OnEnemyDeathSignal>().To<OnEnemyDeathCommand>(); 
+            commandBinder.Bind<OnHitPlayerSignal>().To<OnHitPlayerCommand>();
+            commandBinder.Bind<OnHitEnemySignal>().To<OnHitEnemyCommand>();
 
             // Init services
             injectionBinder.Bind<PlayerStartsService>().ToSingleton();
             injectionBinder.Bind<TilemapService>().ToSingleton();
 
             // Init mediators
-//            mediationBinder.Bind<EnemyView>().To<EnemyMediator>();
+            mediationBinder.Bind<EnemyView>().To<EnemyMediator>();
             mediationBinder.Bind<GameOverView>().To<GameOverMediator>();
             mediationBinder.Bind<PlayerView>().To<PlayerMediator>();
             mediationBinder.Bind<BombView>().To<BombMediator>();

@@ -14,10 +14,10 @@ namespace Mediators.MainGame
         public CheckHitExplodePlayerSignal CheckHitExplodePlayerSignal { get; set; }
 
         /// <summary>
-        /// On explode signal
+        /// On hit player signal
         /// </summary>
         [Inject]
-        public GameOverSignal GameOverSignal { get; set; }
+        public OnHitPlayerSignal OnHitPlayerSignal { get; set; }
 
         /// <summary>
         /// Player starts service
@@ -47,14 +47,7 @@ namespace Mediators.MainGame
                 var cellPos = TilemapService.Tilemap.WorldToCell(transform.position);
                 if (cellPos != pos)
                     return;
-                if (PlayerStartsService.Health > 0)
-                {
-                    PlayerStartsService.Health--;
-                }
-
-                if (PlayerStartsService.Health != 0)
-                    return;
-                GameOverSignal.Dispatch();
+                OnHitPlayerSignal.Dispatch();
             });
         }
 

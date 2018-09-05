@@ -31,9 +31,12 @@ namespace Commands
         /// </summary>
         public override void Execute()
         {
-            EnemyView.Health -= HitDamage;
+            if (EnemyView != null && EnemyView.Health > 0)
+            {
+                EnemyView.Health -= HitDamage;
+            }
 
-            if (EnemyView.Health >= 0)
+            if (EnemyView.Health > 0)
                 return;
             OnEnemyDeathSignal.Dispatch(EnemyView);
         }

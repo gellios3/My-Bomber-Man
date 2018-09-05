@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 namespace Signals
 {
-    public class CheckHitExplodePlayerSignal : Signal<Vector3Int>
+    public class CheckHitExplodeSignal : Signal<Vector3Int>
     {
     }
 }

@@ -13,18 +13,18 @@ namespace Mediators.Managers
         /// </summary>
         [Inject]
         public TilemapService TilemapService { get; set; }
-        
+
         /// <summary>
         /// On explode signal
         /// </summary>
         [Inject]
         public OnExplodeSignal OnExplodeSignal { get; set; }
-        
+
         /// <summary>
         /// On explode signal
         /// </summary>
         [Inject]
-        public CheckHitExplodePlayerSignal CheckHitExplodePlayerSignal { get; set; }
+        public CheckHitExplodeSignal CheckHitExplodeSignal { get; set; }    
 
         /// <summary>
         /// On register mediator
@@ -90,11 +90,11 @@ namespace Mediators.Managers
             {
                 View.Tilemap.SetTile(cell, null);
             }
-            
-            CheckHitExplodePlayerSignal.Dispatch(cell); 
-            
+
+            CheckHitExplodeSignal.Dispatch(cell);
+
             var pos = View.Tilemap.GetCellCenterWorld(cell);
-    
+
             var explosionEffect = Instantiate(View.ExplosionPrefab, pos, Quaternion.identity);
 
             // Destroy Effect after 2 seconds 

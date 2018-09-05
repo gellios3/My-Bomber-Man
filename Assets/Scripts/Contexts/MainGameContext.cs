@@ -64,7 +64,7 @@ namespace Contexts
             // init Signals
             injectionBinder.Bind<GameOverSignal>().ToSingleton();
             injectionBinder.Bind<OnExplodeSignal>().ToSingleton();
-            injectionBinder.Bind<CheckHitExplodePlayerSignal>().ToSingleton();
+            injectionBinder.Bind<CheckHitExplodeSignal>().ToSingleton();
 
             // Init commands
             commandBinder.Bind<OnEnemyDeathSignal>().To<OnEnemyDeathCommand>(); 
@@ -80,7 +80,8 @@ namespace Contexts
             mediationBinder.Bind<GameOverView>().To<GameOverMediator>();
             mediationBinder.Bind<PlayerView>().To<PlayerMediator>();
             mediationBinder.Bind<BombView>().To<BombMediator>();
-            mediationBinder.Bind<MapManagerView>().To<MapManagerMediator>();
+            mediationBinder.Bind<MapManagerView>().To<MapManagerMediator>(); 
+            mediationBinder.Bind<EnemiesManagerView>().To<EnemiesManagerMediator>();
         }
     }
 }

@@ -11,6 +11,11 @@ namespace Services
         /// Current health
         /// </summary>
         public int Health { get; set; }
+        
+        /// <summary>
+        /// Player damage
+        /// </summary>
+        public int Damage { get; set; }
 
         /// <summary>
         /// Has paused

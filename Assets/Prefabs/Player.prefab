@@ -89,10 +89,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb043a842175044ca7b3854cf3ac6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilemap: {fileID: 0}
   _bombPrefab: {fileID: 1440641589785580, guid: 6df44633a45208b479bc0c711012ee46,
     type: 2}
   _health: 3
+  _damage: 1
   _speed: 3
 --- !u!212 &212344630880484122
 SpriteRenderer:

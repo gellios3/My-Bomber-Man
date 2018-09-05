@@ -8,10 +8,10 @@ namespace Mediators.MainGame
     public class PlayerMediator : TargetMediator<PlayerView>
     {
         /// <summary>
-        /// On explode signal
+        /// On check explode signal
         /// </summary>
         [Inject]
-        public CheckHitExplodePlayerSignal CheckHitExplodePlayerSignal { get; set; }
+        public CheckHitExplodeSignal CheckHitExplodeSignal { get; set; }
 
         /// <summary>
         /// On hit player signal
@@ -37,12 +37,13 @@ namespace Mediators.MainGame
         public override void OnRegister()
         {
             PlayerStartsService.Health = View.Health;
+            PlayerStartsService.Damage = View.Damage;
 
             View.OnMove += MovePlayer;
 
             View.OnSpawnBomb += SpawnBomb;
 
-            CheckHitExplodePlayerSignal.AddListener(pos =>
+            CheckHitExplodeSignal.AddListener(pos =>
             {
                 var cellPos = TilemapService.Tilemap.WorldToCell(transform.position);
                 if (cellPos != pos)

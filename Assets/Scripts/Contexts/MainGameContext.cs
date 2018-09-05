@@ -61,27 +61,20 @@ namespace Contexts
             // init Signals
             injectionBinder.Bind<GameOverSignal>().ToSingleton();
             injectionBinder.Bind<OnExplodeSignal>().ToSingleton();
+            injectionBinder.Bind<CheckHitExplodePlayerSignal>().ToSingleton();
 
             // Init commands
 //            commandBinder.Bind<OnBuyTurretSignal>().To<OnBuyTurretCommand>(); 
-//            commandBinder.Bind<OnEnemyDeathSignal>().To<OnEnemyDeathCommand>(); 
-//            commandBinder.Bind<OnUpgradeTurretSignal>().To<OnUpgradeTurretCommand>();     
-//            commandBinder.Bind<OnSellTurretSignal>().To<OnSellTurretCommand>();
-//            commandBinder.Bind<OnHitPlayerSignal>().To<OnHitPlayerCommand>();
-//            commandBinder.Bind<OnHitEnemySignal>().To<OnHitEnemyCommand>();
 
             // Init services
             injectionBinder.Bind<PlayerStartsService>().ToSingleton();
+            injectionBinder.Bind<TilemapService>().ToSingleton();
 
             // Init mediators
 //            mediationBinder.Bind<EnemyView>().To<EnemyMediator>();
             mediationBinder.Bind<PlayerView>().To<PlayerMediator>();
             mediationBinder.Bind<BombView>().To<BombMediator>();
             mediationBinder.Bind<MapManagerView>().To<MapManagerMediator>();
-//            mediationBinder.Bind<BulletView>().To<BulletMediator>();
-//            mediationBinder.Bind<TurretView>().To<TurretMediator>();
-//            mediationBinder.Bind<GameOverView>().To<GameOverMediator>();
-//            mediationBinder.Bind<NodeUiView>().To<NodeUiMediator>();
         }
     }
 }

@@ -8,16 +8,7 @@ namespace Views.MainGame
 {
     public class PlayerView : EventView
     {
-        [Inject] public PlayerStartsService PlayerStartsService { get; set; }
-
-     
-
-        /// <summary>
-        /// Game play tilemap
-        /// </summary>
-        [SerializeField] private Tilemap _tilemap;
         
-        public Tilemap Tilemap => _tilemap;
 
         /// <summary>
         /// Bomb prefab
@@ -30,13 +21,15 @@ namespace Views.MainGame
         /// Player health
         /// </summary>
         [SerializeField] private int _health;
+        
+        public int Health => _health;
 
         /// <summary>
         /// Player speed
         /// </summary>
         [SerializeField] private float _speed;
         
-        public float Speed => _speed;
+        public float Speed => _speed;    
 
         /// <summary>
         /// On move player
@@ -47,11 +40,6 @@ namespace Views.MainGame
         /// On move player
         /// </summary>
         public event Action OnSpawnBomb;
-
-        protected override void Start()
-        {
-            PlayerStartsService.Health = _health;
-        }
 
         private void Update()
         {

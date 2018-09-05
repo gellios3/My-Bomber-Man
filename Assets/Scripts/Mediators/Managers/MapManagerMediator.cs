@@ -1,3 +1,4 @@
+using Services;
 using Signals;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,10 +9,22 @@ namespace Mediators.Managers
     public class MapManagerMediator : TargetMediator<MapManagerView>
     {
         /// <summary>
+        /// Tilemap service
+        /// </summary>
+        [Inject]
+        public TilemapService TilemapService { get; set; }
+        
+        /// <summary>
         /// On explode signal
         /// </summary>
         [Inject]
         public OnExplodeSignal OnExplodeSignal { get; set; }
+        
+        /// <summary>
+        /// On explode signal
+        /// </summary>
+        [Inject]
+        public CheckHitExplodePlayerSignal CheckHitExplodePlayerSignal { get; set; }
 
         /// <summary>
         /// On register mediator
@@ -19,6 +32,8 @@ namespace Mediators.Managers
         public override void OnRegister()
         {
             OnExplodeSignal.AddListener(Explode);
+
+            TilemapService.Tilemap = View.Tilemap;
         }
 
         /// <summary>
@@ -75,8 +90,11 @@ namespace Mediators.Managers
             {
                 View.Tilemap.SetTile(cell, null);
             }
-
+            
+            CheckHitExplodePlayerSignal.Dispatch(cell); 
+            
             var pos = View.Tilemap.GetCellCenterWorld(cell);
+    
             var explosionEffect = Instantiate(View.ExplosionPrefab, pos, Quaternion.identity);
 
             // Destroy Effect after 2 seconds 

@@ -1,3 +1,5 @@
+using Services;
+using Signals;
 using UnityEngine;
 using Views.MainGame;
 
@@ -6,13 +8,54 @@ namespace Mediators.MainGame
     public class PlayerMediator : TargetMediator<PlayerView>
     {
         /// <summary>
+        /// On explode signal
+        /// </summary>
+        [Inject]
+        public CheckHitExplodePlayerSignal CheckHitExplodePlayerSignal { get; set; }
+
+        /// <summary>
+        /// On explode signal
+        /// </summary>
+        [Inject]
+        public GameOverSignal GameOverSignal { get; set; }
+
+        /// <summary>
+        /// Player starts service
+        /// </summary>
+        [Inject]
+        public PlayerStartsService PlayerStartsService { get; set; }
+
+        /// <summary>
+        /// Tilemap service
+        /// </summary>
+        [Inject]
+        public TilemapService TilemapService { get; set; }
+
+        /// <summary>
         /// On register mediator
         /// </summary>
         public override void OnRegister()
         {
+            PlayerStartsService.Health = View.Health;
+
             View.OnMove += MovePlayer;
 
             View.OnSpawnBomb += SpawnBomb;
+
+            CheckHitExplodePlayerSignal.AddListener(pos =>
+            {
+                var cellPos = TilemapService.Tilemap.WorldToCell(transform.position);
+                if (cellPos != pos)
+                    return;
+                if (PlayerStartsService.Health > 0)
+                {
+                    PlayerStartsService.Health--;
+                }
+
+                if (PlayerStartsService.Health != 0)
+                    return;
+                GameOverSignal.Dispatch();
+            });
         }
 
         /// <summary>
@@ -20,8 +63,8 @@ namespace Mediators.MainGame
         /// </summary>
         private void SpawnBomb()
         {
-            var cell = View.Tilemap.WorldToCell(transform.position);
-            var cellCenterPos = View.Tilemap.GetCellCenterWorld(cell);
+            var cell = TilemapService.Tilemap.WorldToCell(transform.position);
+            var cellCenterPos = TilemapService.Tilemap.GetCellCenterWorld(cell);
 
             Instantiate(View.BombPrefab, cellCenterPos, Quaternion.identity, View.transform.parent);
         }

@@ -1,5 +1,6 @@
 ﻿using Mediators.MainGame;
 using Mediators.Managers;
+using Mediators.UI;
 using strange.extensions.command.api;
 using strange.extensions.command.impl;
 using strange.extensions.context.api;
@@ -9,6 +10,7 @@ using Signals;
 using UnityEngine;
 using Views.MainGame;
 using Views.Managers;
+using Views.UI;
 
 namespace Contexts
 {
@@ -72,6 +74,7 @@ namespace Contexts
 
             // Init mediators
 //            mediationBinder.Bind<EnemyView>().To<EnemyMediator>();
+            mediationBinder.Bind<GameOverView>().To<GameOverMediator>();
             mediationBinder.Bind<PlayerView>().To<PlayerMediator>();
             mediationBinder.Bind<BombView>().To<BombMediator>();
             mediationBinder.Bind<MapManagerView>().To<MapManagerMediator>();

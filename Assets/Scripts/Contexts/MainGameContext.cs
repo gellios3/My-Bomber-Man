@@ -1,4 +1,5 @@
 ﻿using Mediators.MainGame;
+using Mediators.Managers;
 using strange.extensions.command.api;
 using strange.extensions.command.impl;
 using strange.extensions.context.api;
@@ -7,6 +8,7 @@ using Services;
 using Signals;
 using UnityEngine;
 using Views.MainGame;
+using Views.Managers;
 
 namespace Contexts
 {
@@ -58,6 +60,7 @@ namespace Contexts
         {
             // init Signals
             injectionBinder.Bind<GameOverSignal>().ToSingleton();
+            injectionBinder.Bind<OnExplodeSignal>().ToSingleton();
 
             // Init commands
 //            commandBinder.Bind<OnBuyTurretSignal>().To<OnBuyTurretCommand>(); 
@@ -73,8 +76,8 @@ namespace Contexts
             // Init mediators
 //            mediationBinder.Bind<EnemyView>().To<EnemyMediator>();
             mediationBinder.Bind<PlayerView>().To<PlayerMediator>();
-//            mediationBinder.Bind<WaveSpawnerView>().To<WaveSpawnerMediator>();
-//            mediationBinder.Bind<NodeView>().To<NodeMediator>();
+            mediationBinder.Bind<BombView>().To<BombMediator>();
+            mediationBinder.Bind<MapManagerView>().To<MapManagerMediator>();
 //            mediationBinder.Bind<BulletView>().To<BulletMediator>();
 //            mediationBinder.Bind<TurretView>().To<TurretMediator>();
 //            mediationBinder.Bind<GameOverView>().To<GameOverMediator>();

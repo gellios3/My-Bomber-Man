@@ -23,7 +23,7 @@ namespace Mediators.MainGame
             var cell = View.Tilemap.WorldToCell(transform.position);
             var cellCenterPos = View.Tilemap.GetCellCenterWorld(cell);
 
-            Instantiate(View.BombPrefab, cellCenterPos, Quaternion.identity);
+            Instantiate(View.BombPrefab, cellCenterPos, Quaternion.identity, View.transform.parent);
         }
 
         /// <summary>
